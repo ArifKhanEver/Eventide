@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="h-[75vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden bg-gradient-to-b from-twilight-900  to-transparent">
+    <section className="h-[70vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden bg-gradient-to-b from-twilight-900  to-transparent">
       
       {/* Background radial glow effects */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-dusk-500/10 blur-[150px] rounded-full pointer-events-none"></div>
