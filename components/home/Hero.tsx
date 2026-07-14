@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="h-[65vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden bg-gradient-to-b from-twilight-900 via-twilight-950/40 to-transparent">
+    <section className="h-[75vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden bg-gradient-to-b from-twilight-900  to-transparent">
       
       {/* Background radial glow effects */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-dusk-500/10 blur-[150px] rounded-full pointer-events-none"></div>
@@ -26,13 +26,13 @@ export default function Hero() {
         
         <div className="pt-4 flex flex-col sm:flex-row justify-center gap-4">
           <Link 
-            href="/explore" 
+            href="/events" 
             className="px-8 py-3.5 bg-amber-400 text-twilight-950 font-bold rounded-xl shadow-lg shadow-amber-500/10 hover:bg-amber-500 transition-all transform hover:-translate-y-0.5 text-center"
           >
             Find Next Event
           </Link>
           <Link 
-            href="/items/add" 
+            href="/events/add" 
             className="px-8 py-3.5 bg-twilight-900 border border-twilight-800 text-white font-semibold rounded-xl hover:bg-twilight-800 hover:border-twilight-700 transition-all text-center"
           >
             Create Event
