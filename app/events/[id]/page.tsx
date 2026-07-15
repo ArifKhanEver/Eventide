@@ -1,12 +1,14 @@
-// app/events/[id]/page.tsx
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { connectDB } from "@/lib/db";
+import { auth } from "@/lib/auth";
 import Event from "@/models/Event";
 import Review from "@/models/Review";
 import EventGallery from "./EventGallery";
 import { FiCalendar, FiMapPin, FiUsers, FiTag, FiClock, FiStar } from "react-icons/fi";
+import ReviewForm from "../../api/events/[id]/ReviewForm";
 
 type PageProps = { params: Promise<{ id: string }> };
 
@@ -14,8 +16,12 @@ export default async function EventDetailsPage({ params }: PageProps) {
   const { id } = await params;
   await connectDB();
 
-  const event = await Event.findById(id).lean();
-  if (!event) notFound(); // renders app/events/[id]/not-found.tsx if you add one, else the default 404
+  const [event, session] = await Promise.all([
+    Event.findById(id).lean(),
+    auth.api.getSession({ headers: await headers() }),
+  ]);
+
+  if (!event) notFound();
 
   const [reviews, relatedEvents] = await Promise.all([
     Review.find({ eventId: event._id }).sort({ createdAt: -1 }).lean(),
@@ -31,6 +37,11 @@ export default async function EventDetailsPage({ params }: PageProps) {
 
   const images = [event.coverImage, ...(event.gallery ?? [])].filter(Boolean) as string[];
 
+  const isOrganizer = session?.user.id === event.organizerId.toString();
+  const hasReviewed = session
+    ? reviews.some((r) => r.userId === session.user.id)
+    : false;
+
   return (
     <main className="min-h-screen bg-twilight-950 px-4 py-10 text-foreground sm:px-8 lg:px-16">
       <div className="mx-auto max-w-5xl">
@@ -40,7 +51,6 @@ export default async function EventDetailsPage({ params }: PageProps) {
 
         <EventGallery images={images} title={event.title} />
 
-        {/* Header */}
         <div className="mt-6 flex flex-wrap items-start justify-between gap-4">
           <div>
             <span className="mb-2 inline-block rounded-full bg-dusk-500/90 px-3 py-1 text-xs font-medium text-white">
@@ -64,13 +74,11 @@ export default async function EventDetailsPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Overview */}
         <section className="mt-8">
           <h2 className="mb-2 text-xl font-semibold">Overview</h2>
           <p className="whitespace-pre-line text-foreground/80">{event.fullDescription}</p>
         </section>
 
-        {/* Key info / specifications */}
         <section className="mt-8 grid grid-cols-1 gap-4 rounded-2xl bg-twilight-900 p-5 sm:grid-cols-2 lg:grid-cols-3">
           <InfoItem
             icon={<FiCalendar />}
@@ -93,6 +101,26 @@ export default async function EventDetailsPage({ params }: PageProps) {
           <h2 className="mb-4 text-xl font-semibold">
             Reviews {reviews.length > 0 && `(${reviews.length})`}
           </h2>
+
+          {!session ? (
+            <p className="mb-6 rounded-xl border border-twilight-800 bg-twilight-900 p-4 text-sm text-foreground/60">
+              <Link href={`/login?redirect=/events/${id}`} className="text-dusk-400 hover:text-dusk-300">
+                Log in
+              </Link>{" "}
+              to leave a review.
+            </p>
+          ) : isOrganizer ? (
+            <p className="mb-6 rounded-xl border border-twilight-800 bg-twilight-900 p-4 text-sm text-foreground/60">
+              You can't review your own event.
+            </p>
+          ) : hasReviewed ? (
+            <p className="mb-6 rounded-xl border border-twilight-800 bg-twilight-900 p-4 text-sm text-foreground/60">
+              You've already reviewed this event.
+            </p>
+          ) : (
+            <ReviewForm eventId={id} />
+          )}
+
           {reviews.length === 0 ? (
             <p className="text-foreground/60">
               No reviews yet — be the first to review this event.
@@ -104,10 +132,13 @@ export default async function EventDetailsPage({ params }: PageProps) {
                   key={review._id.toString()}
                   className="rounded-xl border border-twilight-800 bg-twilight-900 p-4"
                 >
-                  <div className="mb-1 flex items-center gap-1 text-amber-400">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <FiStar key={i} className={i < review.rating ? "fill-amber-400" : "opacity-30"} />
-                    ))}
+                  <div className="mb-1 flex items-center justify-between">
+                    <span className="text-sm font-medium">{review.userName ?? "Anonymous"}</span>
+                    <div className="flex items-center gap-1 text-amber-400">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <FiStar key={i} className={i < review.rating ? "fill-amber-400" : "opacity-30"} />
+                      ))}
+                    </div>
                   </div>
                   <p className="text-sm text-foreground/80">{review.comment}</p>
                 </div>
@@ -116,7 +147,6 @@ export default async function EventDetailsPage({ params }: PageProps) {
           )}
         </section>
 
-        {/* Related events */}
         {relatedEvents.length > 0 && (
           <section className="mt-10">
             <h2 className="mb-4 text-xl font-semibold">More {event.category} events</h2>
@@ -152,15 +182,7 @@ export default async function EventDetailsPage({ params }: PageProps) {
   );
 }
 
-function InfoItem({
-  icon,
-  label,
-  value,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-}) {
+function InfoItem({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
     <div className="flex items-start gap-3">
       <span className="mt-0.5 text-dusk-400">{icon}</span>

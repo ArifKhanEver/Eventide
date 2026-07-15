@@ -233,7 +233,7 @@ export default function ExplorePage() {
             <Pagination>
               <Pagination.Content className="gap-1 bg-gray-50/5 rounded-lg border border-twilight-800 px-3 py-2">
                 <Pagination.Item>
-                  <Pagination.Previous className="text-white/70 hover:text-white"
+                  <Pagination.Previous className="text-amber-700"
                     isDisabled={page === 1}
                     onPress={() => setPage((p) => Math.max(1, p - 1))}
                   >
@@ -261,7 +261,7 @@ export default function ExplorePage() {
 
                 <Pagination.Item>
                   <Pagination.Next
-                    className="text-white/70 hover:text-white"
+                    className="text-amber-700"
                     isDisabled={page === totalPages}
                     onPress={() => setPage((p) => Math.min(totalPages, p + 1))}
                   >
