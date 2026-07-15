@@ -1,7 +1,4 @@
-import Features from "@/components/home/Features";
 import Hero from "@/components/home/Hero";
-import Stats from "@/components/home/StatsChart";
-import Categories from "@/components/home/Categories";
 import EventListing from "@/components/home/EventListing";
 import Testimonials from "@/components/home/Testimonials";
 import NewsletterFaq from "@/components/home/NewsLetterFaq";
@@ -16,8 +13,6 @@ import {
   FiMapPin,
   FiUsers,
   FiTrendingUp,
-  FiZap,
-  FiShield,
   FiSearch,
   FiPlusCircle,
   FiHelpCircle,
@@ -28,9 +23,6 @@ import { FiMic, FiMusic, FiTool, FiActivity, FiStar } from "react-icons/fi";
 import Review from "@/models/Review";
 import StatsChart from "@/components/home/StatsChart";
 
-// Re-fetched on every request rather than cached statically, since event
-// counts/upcoming events change as organizers add things — fine at this
-// scale, and simpler than reasoning about ISR revalidation windows right now.
 export const dynamic = "force-dynamic";
 
 
@@ -348,9 +340,6 @@ async function aggregateByMonth(Model: typeof Event | typeof Review) {
   ]);
 }
 
-// Builds a fixed 6-month series (oldest → newest), filling in 0 for any
-// month with no activity, so the chart always has consistent x-axis labels
-// regardless of what data actually exists.
 function buildMonthlySeries(
   eventsByMonth: { _id: { year: number; month: number }; count: number }[],
   reviewsByMonth: { _id: { year: number; month: number }; count: number }[]
