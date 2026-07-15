@@ -95,7 +95,7 @@ export default function AddEventPage() {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
           <Field label="Title" error={errors.title?.message}>
             <Input
-              className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+              className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white placeholder:text-foreground/50"
               placeholder="e.g. Dhaka Tech Summit 2026"
               {...register("title", {
                 required: "Title is required",
@@ -106,7 +106,7 @@ export default function AddEventPage() {
 
           <Field label="Short Description" error={errors.shortDescription?.message}>
             <Input
-              className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+              className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white placeholder:text-foreground/50"
               placeholder="One line summary shown on cards"
               {...register("shortDescription", {
                 required: "Short description is required",
@@ -117,7 +117,7 @@ export default function AddEventPage() {
 
           <Field label="Full Description" error={errors.fullDescription?.message}>
             <TextArea
-              className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+              className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white placeholder:text-foreground/50"
               rows={5}
               placeholder="Full details shown on the event page"
               {...register("fullDescription", {
@@ -129,7 +129,7 @@ export default function AddEventPage() {
 
           <Field label="Category" error={errors.category?.message}>
             <select
-              className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+              className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white placeholder:text-foreground/50"
               defaultValue=""
               {...register("category", { required: "Please pick a category" })}
             >
@@ -148,14 +148,14 @@ export default function AddEventPage() {
             <Field label="Date" error={errors.date?.message}>
               <input
                 type="date"
-                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white placeholder:text-foreground/50"
                 {...register("date", { required: "Date is required" })}
               />
             </Field>
             <Field label="Time" error={errors.time?.message}>
               <input
                 type="time"
-                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white"
                 {...register("time", { required: "Time is required" })}
               />
             </Field>
@@ -164,14 +164,14 @@ export default function AddEventPage() {
           <div className="grid grid-cols-2 gap-4">
             <Field label="Venue" error={errors.venue?.message}>
               <Input
-                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white placeholder:text-foreground/50"
                 placeholder="e.g. Bangabandhu Stadium"
                 {...register("venue", { required: "Venue is required" })}
               />
             </Field>
             <Field label="City" error={errors.city?.message}>
               <Input
-                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white placeholder:text-foreground/50"
                 placeholder="e.g. Dhaka"
                 {...register("city", { required: "City is required" })}
               />
@@ -182,7 +182,7 @@ export default function AddEventPage() {
             <Field label="Price (৳, 0 = free)" error={errors.price?.message}>
               <Input
                 type="number"
-                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white placeholder:text-foreground/50"
                 {...register("price", {
                   required: "Price is required",
                   valueAsNumber: true,
@@ -193,7 +193,7 @@ export default function AddEventPage() {
             <Field label="Capacity" error={errors.capacity?.message}>
               <Input
                 type="number"
-                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+                className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white placeholder:text-foreground/50"
                 {...register("capacity", {
                   required: "Capacity is required",
                   valueAsNumber: true,
@@ -205,7 +205,7 @@ export default function AddEventPage() {
 
           <Field label="Cover Image URL (optional)" error={errors.coverImage?.message}>
             <Input
-              className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm"
+              className="w-full rounded-lg border border-twilight-800 bg-twilight-900 px-3 py-2 text-sm text-white placeholder:text-foreground/50"
               placeholder="https://..."
               {...register("coverImage", {
                 pattern: {

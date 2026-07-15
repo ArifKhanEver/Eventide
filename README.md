@@ -6,7 +6,7 @@
 
 **A production-ready, full-stack event management platform built with Next.js 16 and TypeScript.**
 
-[Live Demo](#-your-live-url-here) · [Report an Issue](#-support) · [Demo Credentials](#-demo-credentials)
+[Live Demo](https://eventide-flame.vercel.app) · [GitHub](https://github.com/ArifKhanEver/Eventide) · [Demo Credentials](#-demo-credentials)
 
 </div>
 
