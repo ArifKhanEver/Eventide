@@ -122,7 +122,7 @@ export default function ExplorePage() {
             <div className="relative">
               <FiSearch className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-foreground/40" />
               <Input
-                className="w-full rounded-lg border border-twilight-800 bg-twilight-950 py-2 pl-9 pr-3 text-sm"
+                className="w-full rounded-lg border border-twilight-800 bg-twilight-950 py-2 pl-9 pr-3 text-sm text-white placeholder:text-foreground/40"
                 placeholder="Search by title..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -133,7 +133,7 @@ export default function ExplorePage() {
           {/* Category select — value/onChange is the v3 API (not the old
               v2 selectedKeys/onSelectionChange pair) */}
           <Select
-            className="w-full"
+            className="w-full "
             placeholder="All categories"
             value={category}
             onChange={(value) => {
@@ -144,7 +144,7 @@ export default function ExplorePage() {
             <Label className="mb-1 block text-sm text-foreground/70">
               Category
             </Label>
-            <Select.Trigger className="w-full rounded-lg border border-twilight-800 bg-twilight-950 px-3 py-2 text-sm">
+            <Select.Trigger className="w-full rounded-lg border border-twilight-800 bg-twilight-950 px-3 py-2 text-sm text-white placeholder:text-foreground/40">
               <Select.Value />
               <Select.Indicator />
             </Select.Trigger>
@@ -169,7 +169,7 @@ export default function ExplorePage() {
             <div className="relative">
               <FiMapPin className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-foreground/40" />
               <Input
-                className="w-full rounded-lg border border-twilight-800 bg-twilight-950 py-2 pl-9 pr-3 text-sm"
+                className="w-full rounded-lg border border-twilight-800 bg-twilight-950 py-2 pl-9 pr-3 text-sm text-white placeholder:text-foreground/40"
                 placeholder="e.g. Dhaka"
                 value={city}
                 onChange={(e) => {
@@ -191,7 +191,7 @@ export default function ExplorePage() {
             <Label className="mb-1 block text-sm text-foreground/70">
               Sort by
             </Label>
-            <Select.Trigger className="w-full rounded-lg border border-twilight-800 bg-twilight-950 px-3 py-2 text-sm">
+            <Select.Trigger className="w-full rounded-lg border border-twilight-800 bg-twilight-950 px-3 py-2 text-sm text-white placeholder:text-foreground/40">
               <Select.Value />
               <Select.Indicator />
             </Select.Trigger>
@@ -231,9 +231,9 @@ export default function ExplorePage() {
         {!isLoading && totalPages > 1 && (
           <div className="mt-10 flex justify-center">
             <Pagination>
-              <Pagination.Content className="gap-1">
+              <Pagination.Content className="gap-1 bg-gray-50/5 rounded-lg border border-twilight-800 px-3 py-2">
                 <Pagination.Item>
-                  <Pagination.Previous
+                  <Pagination.Previous className="text-white/70 hover:text-white"
                     isDisabled={page === 1}
                     onPress={() => setPage((p) => Math.max(1, p - 1))}
                   >
@@ -243,14 +243,15 @@ export default function ExplorePage() {
 
                 {getPageList(page, totalPages).map((item, idx) =>
                   item === "ellipsis" ? (
-                    <Pagination.Item key={`e-${idx}`}>
+                    <Pagination.Item key={`e-${idx}`} >
                       <Pagination.Ellipsis />
-                    </Pagination.Item>
+                    </Pagination.Item >
                   ) : (
                     <Pagination.Item key={item}>
                       <Pagination.Link
                         isActive={item === page}
                         onPress={() => setPage(item)}
+                        className="text-amber-700 font-bold"
                       >
                         {item}
                       </Pagination.Link>
@@ -260,6 +261,7 @@ export default function ExplorePage() {
 
                 <Pagination.Item>
                   <Pagination.Next
+                    className="text-white/70 hover:text-white"
                     isDisabled={page === totalPages}
                     onPress={() => setPage((p) => Math.min(totalPages, p + 1))}
                   >
@@ -315,14 +317,9 @@ function EventCardItem({ event }: { event: EventCard }) {
           </span>
         </div>
 
-        <Button
-          className="mt-3 w-full rounded-lg bg-amber-400 py-2 text-sm font-semibold text-twilight-950 hover:bg-amber-500"
-          onPress={() => {
-            window.location.href = `/events/${event._id}`;
-          }}
-        >
-          View Details
-        </Button>
+        <Link href={`/events/${event._id}`} className="mt-3 w-full rounded-lg bg-amber-400 py-2 text-sm font-semibold text-twilight-950 hover:bg-amber-500 text-center">
+            View Details
+        </Link>
       </div>
     </div>
   );
