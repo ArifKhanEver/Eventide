@@ -60,7 +60,7 @@ export default function NewsletterFaq() {
             />
             <button 
               type="submit" 
-              className="w-full bg-amber-400 hover:bg-amber-500 text-twilight-950 font-extrabold py-3.5 rounded-xl transition-colors text-xs tracking-wider uppercase shadow-xl shadow-amber-500/5"
+              className="cursor-pointer w-full bg-amber-400 hover:bg-amber-500 text-twilight-950 font-extrabold py-3.5 rounded-xl transition-colors text-xs tracking-wider uppercase shadow-xl shadow-amber-500/5"
             >
               Secure Subscriptions
             </button>

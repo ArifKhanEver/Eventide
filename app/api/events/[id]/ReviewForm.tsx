@@ -66,7 +66,7 @@ export default function ReviewForm({ eventId }: { eventId: string }) {
               onMouseEnter={() => setHoverRating(starValue)}
               onMouseLeave={() => setHoverRating(0)}
               aria-label={`Rate ${starValue} star${starValue > 1 ? "s" : ""}`}
-              className="text-xl text-amber-400"
+              className="cursor-pointer text-xl text-amber-400"
             >
               <FiStar className={filled ? "fill-amber-400" : "opacity-30"} />
             </button>
@@ -87,7 +87,7 @@ export default function ReviewForm({ eventId }: { eventId: string }) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="self-start rounded-lg bg-amber-400 px-4 py-2 text-sm font-semibold text-twilight-950 hover:bg-amber-500 disabled:opacity-60"
+        className="cursor-pointer self-start rounded-lg bg-amber-400 px-4 py-2 text-sm font-semibold text-twilight-950 hover:bg-amber-500 disabled:opacity-60"
       >
         {isSubmitting ? "Submitting..." : "Submit Review"}
       </button>
