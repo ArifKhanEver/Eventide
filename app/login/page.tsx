@@ -62,7 +62,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-md bg-amber-400 py-2 font-semibold text-twilight-950 disabled:opacity-50"
+          className="cursor-pointer w-full rounded-md bg-amber-400 py-2 font-semibold text-twilight-950 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? "Logging in..." : "Log in"}
         </button>
@@ -70,7 +70,7 @@ export default function LoginPage() {
         <button
           type="button"
           onClick={fillDemo}
-          className="w-full rounded-md border border-dusk-400 py-2 text-sm text-dusk-400"
+          className="cursor-pointer w-full rounded-md border border-dusk-400 py-2 text-sm text-dusk-400"
         >
           Use demo credentials
         </button>
