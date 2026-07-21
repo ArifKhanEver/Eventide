@@ -154,7 +154,7 @@ export default function ManageEventsPage() {
                           <button
                             onClick={() => handleDelete(event._id)}
                             disabled={deletingId === event._id}
-                            className="text-red-400 hover:text-red-300 disabled:opacity-50"
+                            className="cursor-pointer text-red-400 hover:text-red-300 disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Delete event"
                           >
                             <FiTrash2 />
@@ -192,7 +192,7 @@ export default function ManageEventsPage() {
                       <button
                         onClick={() => handleDelete(event._id)}
                         disabled={deletingId === event._id}
-                        className="text-red-400 disabled:opacity-50"
+                        className="cursor-pointer text-red-400 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <FiTrash2 />
                       </button>
