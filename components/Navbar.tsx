@@ -63,7 +63,7 @@ export default function Navbar() {
           {isPending ? null : isLoggedIn ? (
             <button
               onClick={handleSignOut}
-              className="rounded-lg border border-twilight-800 px-4 py-2 text-sm hover:bg-twilight-900"
+              className="cursor-pointer rounded-lg border border-twilight-800 px-4 py-2 text-sm hover:bg-twilight-900"
             >
               Sign Out
             </button>
@@ -84,7 +84,7 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="text-2xl md:hidden"
+          className="cursor-pointer text-2xl md:hidden"
           onClick={() => setIsOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -112,7 +112,7 @@ export default function Navbar() {
                   setIsOpen(false);
                   handleSignOut();
                 }}
-                className="text-left text-sm text-red-400"
+                className="cursor-pointer text-left text-sm text-red-400"
               >
                 Sign Out
               </button>
