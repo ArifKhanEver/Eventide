@@ -39,7 +39,7 @@ export default function EventGallery({
             <button
               key={src + i}
               onClick={() => setActive(i)}
-              className={`relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-colors ${
+              className={`cursor-pointer relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-colors ${
                 i === active ? "border-amber-400" : "border-transparent opacity-70 hover:opacity-100"
               }`}
             >
